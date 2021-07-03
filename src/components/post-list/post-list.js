@@ -1,17 +1,17 @@
+import { ListGroup, ListGroupItem } from 'reactstrap'; //практика використання компонентів бутстрапа
 import PostListItem from '../post-list-item';
 
 const PostList = ({posts}) => {
 	const elements = posts.map((item) => {
 		const {id, ...itemProps} = item;
-		return <li key={id} 
-		className="list-group-item">
-			<PostListItem {...itemProps} />
-			</li>
+		return <ListGroupItem key={id} >
+				<PostListItem {...itemProps} />
+			</ListGroupItem>
 	});
 	return (
-		<ul className="app-list list-group">
+		<ListGroup className="app-list">
 			{elements}
-		</ul>
+		</ListGroup>
 	)
 }
 
