@@ -17,11 +17,11 @@ const Header = styled.section`
 		font-size: 1.2rem;
 	}
 `;
-const AppHeader = () => {
+const AppHeader = ({allPosts, likedPosts}) => {
 	return (
 		<Header as="div" colored /* 1. Можемо викоистовувати перейменування тега 2.можемо передавати пропси в style-components */>
 			<h1>Andrii babych</h1>
-			<h2>5 записів, з них сподобались 0</h2>
+			<h2>{allPosts} записів, з них сподобались {likedPosts}</h2>
 		</Header>
 	);
 };
