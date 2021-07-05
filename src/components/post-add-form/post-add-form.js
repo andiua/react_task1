@@ -3,45 +3,50 @@ import './post-add-form.css';
 
 export default class PostAddForm extends Component {
 	state = {
-		text: ''
-	}
+		text: '',
+		classNames: 'form-control new-post-label',
+	};
 
 	onValueChange = e => {
-		this.setState( (prevState) => {
-			return	(
-				prevState.text = e.target.value
-			)
-		})
-	}
+		this.setState(prevState => {
+			return {
+				text: e.target.value,
+				classNames: prevState.classNames.replace(' error', ''),
+			};
+		});
+	};
 
 	onSubmit = e => {
 		e.preventDefault();
-		if(this.state.text === '') {
-			this.setState( {
-				text: 'Введіть якийсь текст'
-			})
+		if (this.state.text === '') {
+			this.setState(prevState => {
+				return { classNames: prevState.classNames + ' error' };
+			});
 		} else {
 			this.props.onAdd(this.state.text);
-			this.setState( {
-				text: ''
-			})
+			this.setState(prevState => {
+				return {
+					text: '',
+					classNames: prevState.classNames.replace(' error', '')
+				};
+			});
 		}
-	}
- 	render() {
+	};
+
+	render() {
 		return (
 			<form onSubmit={this.onSubmit} className="bottom-panel d-flex">
-				<input 
+				<input
 					onChange={this.onValueChange}
 					value={this.state.text}
-					type="text" 
+					type="text"
 					placeholder="Про що ви думаєте зараз?"
-					className="form-control new-post-label" />
-					<button 
-						type="submit"
-						className="btn btn-outline-secondary">
-						Додати
-					</button>
-				</form>
-		)
+					className={this.state.classNames}
+				/>
+				<button type="submit" className="btn btn-outline-secondary">
+					Додати
+				</button>
+			</form>
+		);
 	}
 }
